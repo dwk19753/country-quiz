@@ -21,6 +21,7 @@ function App() {
 
   return (
     // Fetch 2 countries
+    // Comment to test adding stuff
     <div>
       <Card>{countries[0]}</Card>
       <Card>{countries[1]}</Card>
