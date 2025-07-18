@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Card from './Card';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -19,12 +20,13 @@ function App() {
       });
   }, []);
 
+  const randomCountry = countries.length > 0 ? countries[0] : null;
+
   return (
-    // Fetch 2 countries
-    // Comment to test adding stuff
     <div>
-      <Card>{countries[0]}</Card>
-      <Card>{countries[1]}</Card>
+      {randomCountry && (
+        <Card country={randomCountry} onClick={() => alert(`You clicked ${randomCountry.name}`)} />
+      )}
     </div>
   );
 }
