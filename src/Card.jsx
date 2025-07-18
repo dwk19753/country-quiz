@@ -1,12 +1,8 @@
-function Card({ imageUrl, onClick }) {
+function Card({ country, onClick }) {
   return (
-    <div>
-      <img
-        src={imageUrl}
-        alt="Country Card"
-        onClick={onClick}
-        style={{ cursor: 'pointer', width: '200px', borderRadius: '8px' }}
-      />
+    <div onClick={onClick} style={{ cursor: 'pointer', border: '1px solid #ccc', padding: '1rem', borderRadius: '8px', textAlign: 'center', width: '200px' }}>
+      <img src={country.flagUrl} alt={country.name} style={{ width: '100%', borderRadius: '4px' }} />
+      <h3>{country.name}</h3>
     </div>
   );
 }
