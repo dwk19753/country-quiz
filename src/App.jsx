@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import Card from './Card';
 
 function App() {
-  const [countries, setCountries] = useState([]);
+  const [country1, setCountry1] = useState(null);
+  const [country2, setCountry2] = useState(null);
 
   useEffect(() => {
     fetch('https://restcountries.com/v3.1/all?fields=name,population,flags')
@@ -13,19 +14,35 @@ function App() {
           population: country.population,
           flagUrl: country.flags.png,
         }));
-        setCountries(simplified);
+
+        // Once countries are loaded, pick two
+        const randomPair = getTwoRandomCountries(simplified);
+        setCountry1(randomPair[0]);
+        setCountry2(randomPair[1]);
       })
       .catch((error) => {
         console.error('Failed to fetch countries:', error);
       });
   }, []);
 
-  const randomCountry = countries.length > 0 ? countries[0] : null;
+  const getTwoRandomCountries = (list) => {
+    const shuffled = [...list].sort(() => 0.5 - Math.random());
+    return [shuffled[0], shuffled[1]];
+  };
 
-  return (
+   return (
     <div>
-      {randomCountry && (
-        <Card country={randomCountry} onClick={() => alert(`You clicked ${randomCountry.name}`)} />
+      {country1 && country2 && (
+        <>
+          <Card
+            country={country1}
+            onClick={() => alert(`You clicked ${country1.name}`)}
+          />
+          <Card
+            country={country2}
+            onClick={() => alert(`You clicked ${country2.name}`)}
+          />
+        </>
       )}
     </div>
   );
